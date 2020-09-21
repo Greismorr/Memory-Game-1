@@ -16,14 +16,13 @@ import javax.swing.JTextPane;
 import java.awt.Font;
 import java.awt.Toolkit;
 
-
 public class Credits extends JFrame {
 
 	private JPanel contentPane;
-	private JButton selecionar;
-	private JLayeredPane layeredPane;
-	private JTextPane txtpnTeste;
-	private JLabel lblNewLabel;
+	private JButton selectButton;
+	private JLayeredPane creditsPanel;
+	private JTextPane creditsText;
+	private Logo ifbaLogo;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -39,7 +38,7 @@ public class Credits extends JFrame {
 	}
 
 	public void initComponentes() {
-		setTitle("Credits"); /* define o titulo da janela */
+		setTitle("Créditos");
 		setResizable(false);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,34 +49,31 @@ public class Credits extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		layeredPane = new JLayeredPane();
-		layeredPane.setForeground(Color.DARK_GRAY);
-		layeredPane.setBackground(new Color(0, 0, 0));
-		contentPane.add(layeredPane, BorderLayout.CENTER);
+		creditsPanel = new JLayeredPane();
+		creditsPanel.setForeground(Color.DARK_GRAY);
+		creditsPanel.setBackground(new Color(0, 0, 0));
+		contentPane.add(creditsPanel, BorderLayout.CENTER);
 
-		selecionar = new JButton("Ok");
-		selecionar.setBounds(120, 323, 89, 23);
-		layeredPane.add(selecionar);
+		selectButton = new JButton("Ok");
+		selectButton.setBounds(120, 323, 89, 23);
+		creditsPanel.add(selectButton);
 
-		txtpnTeste = new JTextPane();
-		txtpnTeste.setBackground(Color.BLACK); /* cor de fundo */
-		txtpnTeste.setFont(new Font("Verdana", Font.PLAIN, 11)); /* caracteristicas de fonte */
-		txtpnTeste.setForeground(Color.WHITE); /* cor do texto */
-		txtpnTeste.setText(
+		creditsText = new JTextPane();
+		creditsText.setBackground(Color.BLACK); 
+		creditsText.setFont(new Font("Verdana", Font.PLAIN, 11)); 
+		creditsText.setForeground(Color.WHITE); 
+		creditsText.setText(
 				"Orientador :\r\n   > Grinaldo Lopes de Oliveira\r\n\t\t\t\r\nColaboradores :\r\n  > Elayne Natalia de O. Argollo\r\n  > Edilton Silva Junior\r\n  > Gabriel dos Reis Morais\r\n");
-		txtpnTeste.setBounds(76, 169, 254, 132);
-		layeredPane.add(txtpnTeste);
+		creditsText.setBounds(76, 169, 254, 132);
+		creditsText.setEditable(false);
+		creditsPanel.add(creditsText);
+		
+		creditsPanel.add(ifbaLogo = new Logo(10, 11, 356, 117));
 
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Credits.class.getResource("/imagens/IFBALogo.png")));
-		lblNewLabel.setBounds(10, 11, 356, 117);
-		layeredPane.add(lblNewLabel);
-
-		/* alterando imagem do icone da janela */
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/JogoMemoria.png")));
-		this.getContentPane().setBackground(Color.BLACK); /* cor do fundo */
+		this.getContentPane().setBackground(Color.BLACK); 
 
-		selecionar.addActionListener(new ActionListener() { /* acao ao clicar no botao Ok */
+		selectButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 			}

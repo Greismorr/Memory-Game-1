@@ -1,23 +1,29 @@
 package jogo;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound {
 
 	String musicJogo = null;
+	private int titleMusic[] = {1, 2, 3, 4, 5, 6};
+	private Clip oClip;
 
 	public void cartaVirando() {
 
 		try {
-
 			String resource = "/audios/turn.wav";
 			
 			InputStream input = getClass().getResourceAsStream(resource);
 
-			Clip oClip = AudioSystem.getClip();
+			oClip = AudioSystem.getClip();
 			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
 			oClip.open(audio);
 			oClip.loop(0); 
@@ -25,173 +31,65 @@ public class Sound {
 		} catch (Exception e) { 
 			e.printStackTrace();
 		}
+	}
+	
+	private void play(String path) {
+		try {
+			InputStream input = (InputStream) getClass().getResourceAsStream(path);
+			oClip = AudioSystem.getClip();
 
+			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
+
+			oClip.open(audio);
+			oClip.loop(Clip.LOOP_CONTINUOUSLY);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void selecionado() {
-
-		try {
-
-			String resource = "/audios/botao.wav";
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-		
-			Clip oClip = AudioSystem.getClip();
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		this.play("/audios/botao.wav");
 	}
 
 	public void erro() {
-
-		try {
-
-			String resource = "/audios/erro2.wav";
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		this.play("/audios/erro2.wav");
 	}
 
 	public void acerto() {
-
-		try {
-
-			String resource = "/audios/acerto.wav";
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		this.play("/audios/acerto.wav");
 	}
 
 	public void vitoria() {
-
-		try {
-
-			String resource = "/audios/vitoria.wav";
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		this.play("/audios/vitoria.wav");
 	}
 
-	public void titulo() {
-
-		try {
-
-			String resource = "/audios/titulo.wav";
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	public void mainMusic() {
+		String path = "/audios/" + this.getRandom(titleMusic) + ".wav";
+			
+		this.play(path);
 	}
 
 	public void turn() {
-
-		try {
-
-			String resource = "/audios/acerto.wav";
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		this.play("/audios/acerto.wav");
 	}
 
 	public void stop() {
-
-	}
-
-	public void music(int x) {
-
 		try {
-
-			String rep = "/audios/";
-			String res = ".wav";
-			res = x + res;
-
-			musicJogo = rep + res;
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(musicJogo);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
+			oClip.stop();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void vaia() {
-
-		try {
-
-			String resource = "/audios/vaia.wav";
-
-			InputStream input = (InputStream) getClass().getResourceAsStream(resource);
-			Clip oClip = AudioSystem.getClip();
-
-			AudioInputStream audio = AudioSystem.getAudioInputStream(input);
-
-			oClip.open(audio);
-			oClip.loop(0);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		this.play("/audios/vaia.wav");
+	}
+	
+	public int getRandom(int[] array){
+	    int randomElement = new Random().nextInt(array.length);
+	    
+	    return array[randomElement];
 	}
 }

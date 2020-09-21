@@ -38,10 +38,10 @@ public class GameFacil extends Letter {
 
 	@Override
 	public void subMenuDeJogoNovoJogoActionPerformed() {
-
 		contCartasViradasUma = 0;
 		pontos = 0;
 		contCardViradaPar = 0;
+		cont = 0;
 	}
 
 	@Override
@@ -92,7 +92,6 @@ public class GameFacil extends Letter {
 				}
 
 				if (contCardViradaPar == 16) { 
-					new Sound().stop();
 
 					if (Integer.parseInt(Pontuacao(0)) == 80) {
 
@@ -117,7 +116,6 @@ public class GameFacil extends Letter {
 					contCartasViradasUma = 0;
 					pontos = 0;
 					contCardViradaPar = 0;
-
 				}
 
 				clicaPrimCarta = null; 
@@ -130,7 +128,6 @@ public class GameFacil extends Letter {
 			viradaParaFrente = false;
 			clicaPrimCarta = null;
 			cont = 0;
-
 		}
 
 	}
@@ -139,7 +136,7 @@ public class GameFacil extends Letter {
 	public void esconderCarta() {
 		this.setIcon(new javax.swing.ImageIcon(getClass().getResource(imgFundo)));
 	}
-
+	
 	@Override
 	public void mostrarCarta() {
 		this.setIcon(new javax.swing.ImageIcon(getClass().getResource(getImgFrente())));

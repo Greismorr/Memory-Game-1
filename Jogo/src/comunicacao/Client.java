@@ -54,13 +54,13 @@ public class Client {
 				public void run() {
 					Game jogo = new Game(); 
 
-					JOptionPane.showMessageDialog(null, nomeCliente + ", você está conectado. Bom Jogo !");
+					JOptionPane.showMessageDialog(null, nomeCliente + ", voce esta conectado. Bom Jogo !");
 					jogo.setVisible(true); 
 				}
 			}.start();
 
 		} catch (UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "Endereço Inválido. Tente novamente !");
+			JOptionPane.showMessageDialog(null, "Endereco Invalido. Tente novamente !");
 			e.printStackTrace();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Servidor esta fora do ar");

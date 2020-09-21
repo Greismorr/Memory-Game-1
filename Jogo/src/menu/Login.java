@@ -27,17 +27,22 @@ import javax.swing.JButton;
 public class Login extends JFrame {
 
 	private JLabel lblCarregando;
-	private JPanel contentPane;
-	private JButton btnJogar;
-	private JLayeredPane layeredPane;
+	private JPanel loginWindow;
+	private JButton playButton;
+	private JLayeredPane loginPane;
 	private Client cliente;
 	private JTextField ipServidor;
 	private JTextField portaServidor;
 	private JTextField nomeJogador;
+	private MenuBar menu;
+	private Logo loginLogo;
+	private Sound loginMusic;
 
 	public Login() {
 		initComponente();
-		menu();
+		menu = new MenuBar(this);
+		loginMusic = new Sound();
+		loginMusic.mainMusic();
 	}
 
 	public static void main(String[] args) {
@@ -62,53 +67,49 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 565);
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		loginWindow = new JPanel();
+		loginWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
+		loginWindow.setLayout(new BorderLayout(0, 0));
+		setContentPane(loginWindow);
 
-		layeredPane = new JLayeredPane();
-		contentPane.add(layeredPane, BorderLayout.CENTER);
+		loginPane = new JLayeredPane();
+		loginWindow.add(loginPane, BorderLayout.CENTER);
 
-		btnJogar = new JButton("Jogar");
-		btnJogar.setBounds(233, 450, 90, 30);
-		layeredPane.add(btnJogar);
+		playButton = new JButton("Jogar");
+		playButton.setBounds(233, 450, 90, 30);
+		loginPane.add(playButton);
 
 		ipServidor = new JTextField();
 		ipServidor.setColumns(10);
 		ipServidor.setBounds(204, 299, 150, 20);
-		layeredPane.add(ipServidor);
+		loginPane.add(ipServidor);
 
-		JLabel lblEntreComIp = new JLabel("Entre com IP do servidor:");
-		lblEntreComIp.setBounds(204, 274, 154, 14);
-		layeredPane.add(lblEntreComIp);
-		lblEntreComIp.setForeground(Color.white);
+		JLabel ipLabel = new JLabel("Entre com IP do servidor:");
+		ipLabel.setBounds(204, 274, 154, 14);
+		loginPane.add(ipLabel);
+		ipLabel.setForeground(Color.white);
 
 		portaServidor = new JTextField();
 		portaServidor.setColumns(10);
 		portaServidor.setBounds(204, 355, 150, 20);
-		layeredPane.add(portaServidor);
+		loginPane.add(portaServidor);
 
-		JLabel lblEntreComA = new JLabel("Entre com a porta:");
-		lblEntreComA.setBounds(204, 330, 167, 14);
-		layeredPane.add(lblEntreComA);
-		lblEntreComA.setForeground(Color.white);
+		JLabel doorLabel = new JLabel("Entre com a porta:");
+		doorLabel.setBounds(204, 330, 167, 14);
+		loginPane.add(doorLabel);
+		doorLabel.setForeground(Color.white);
 
-		JLabel lblNewLabel_1 = new JLabel("");
-
-		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/imagens/testepng.png")));
-		lblNewLabel_1.setBounds(25, 43, 534, 190);
-		layeredPane.add(lblNewLabel_1);
+		loginPane.add(loginLogo = new Logo(25, 43, 534, 190, "/imagens/testepng.png"));
 
 		nomeJogador = new JTextField();
 		nomeJogador.setColumns(10);
 		nomeJogador.setBounds(204, 411, 150, 20);
-		layeredPane.add(nomeJogador);
+		loginPane.add(nomeJogador);
 
-		JLabel lblInformeSeuNome = new JLabel("Informe seu nome:");
-		lblInformeSeuNome.setForeground(Color.WHITE);
-		lblInformeSeuNome.setBounds(204, 386, 167, 14);
-		layeredPane.add(lblInformeSeuNome);
+		JLabel nameLabel = new JLabel("Informe seu nome:");
+		nameLabel.setForeground(Color.WHITE);
+		nameLabel.setBounds(204, 386, 167, 14);
+		loginPane.add(nameLabel);
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/JogoMemoria.png")));
 
@@ -116,83 +117,33 @@ public class Login extends JFrame {
 
 		System.out.println(nomeJogador.getText());
 
-		btnJogar.addActionListener(new ActionListener() {
+		playButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					new Sound().selecionado();
 					cliente = new Client(ipServidor.getText(), Integer.parseInt(portaServidor.getText()),
 							nomeJogador.getText());
 					cliente.executa();
+					setVisible(false);
+					loginMusic.stop();
 				} catch (IOException e) {
 					lblCarregando.setVisible(false);
 					e.printStackTrace();
 				}
 			}
 		});
-
 	}
-
-	public void menu() {
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenu mnNewMenu = new JMenu("Menu");
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmNewMenuItem = new JMenuItem("New Game");
-		mnNewMenu.add(mntmNewMenuItem);
-
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Game jogo = new Game();
-				Login.super.setVisible(false);
-
-				Login login = new Login();
-				login.setVisible(true);
-			}
-		});
-
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Exit");
-		mnNewMenu.add(mntmNewMenuItem_1);
-
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
-			}
-		});
-
-		JMenu mnNewMenu_1 = new JMenu("Help");
-		menuBar.add(mnNewMenu_1);
-
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Welcome");
-		mnNewMenu_1.add(mntmNewMenuItem_4);
-
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Welcome obj = new Welcome();
-				obj.main(null);
-			}
-		});
-
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Version");
-		mnNewMenu_1.add(mntmNewMenuItem_3);
-
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Version obj = new Version();
-				obj.main(null);
-			}
-		});
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Credits");
-		mnNewMenu_1.add(mntmNewMenuItem_2);
-
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Credits obj = new Credits();
-				obj.main(null);
-			}
-		});
+	
+	
+	public String getIp() {
+		return this.ipServidor.getText();
 	}
-
+	
+	public String getPlayer() {
+		return this.nomeJogador.getText();
+	}
+	
+	public String getPort() {
+		return this.ipServidor.getText();
+	}
 }

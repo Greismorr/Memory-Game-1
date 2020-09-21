@@ -27,8 +27,11 @@ import javax.swing.JButton;
 
 public class Score extends JFrame {
 
-	private JPanel contentPane;
-	private JLayeredPane layeredPane;
+	private JPanel scoreWindow;
+	private JLayeredPane scorePane;
+	private MenuBar menu;
+	private Logo scoreLogo;
+	private Game newGame;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,72 +47,7 @@ public class Score extends JFrame {
 	}
 
 	public Score() {
-		menu();
-	}
-
-	public void menu() {
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenu mnNewMenu = new JMenu("Menu");
-		menuBar.add(mnNewMenu);
-
-		JMenuItem mntmNewMenuItem = new JMenuItem("New Game");
-		mnNewMenu.add(mntmNewMenuItem);
-
-		mntmNewMenuItem.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent arg0) {
-				Game jogo = new Game(); 
-				Score.super.setVisible(false); 
-
-				// JanelaPontuacao login = new JanelaPontuacao(); /* instancia um novo login */
-				// login.setVisible(true); /* torna o login visiavel ao usuario */
-			}
-		});
-
-
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Exit");
-		mnNewMenu.add(mntmNewMenuItem_1);
-
-		mntmNewMenuItem_1.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0); 
-			}
-		});
-
-		JMenu mnNewMenu_1 = new JMenu("Help");
-		menuBar.add(mnNewMenu_1);
-
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Welcome");
-		mnNewMenu_1.add(mntmNewMenuItem_4);
-
-		mntmNewMenuItem_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Welcome obj = new Welcome();
-				obj.main(null);
-			}
-		});
-
-		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Version");
-		mnNewMenu_1.add(mntmNewMenuItem_3);
-
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Version obj = new Version();
-				obj.main(null);
-			}
-		});
-
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Credits");
-		mnNewMenu_1.add(mntmNewMenuItem_2);
-
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Credits obj = new Credits(); 
-				obj.main(null);
-			}
-		});
-
+		menu = new MenuBar(this);
 	}
 
 	public void initComponents(Map<String, String> map) {
@@ -119,15 +57,15 @@ public class Score extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 423, 418);
 
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		scoreWindow = new JPanel();
+		scoreWindow.setBorder(new EmptyBorder(5, 5, 5, 5));
+		scoreWindow.setLayout(new BorderLayout(0, 0));
+		setContentPane(scoreWindow);
 
-		layeredPane = new JLayeredPane();
-		layeredPane.setForeground(Color.DARK_GRAY);
-		layeredPane.setBackground(new Color(0, 0, 0));
-		contentPane.add(layeredPane, BorderLayout.CENTER);
+		scorePane= new JLayeredPane();
+		scorePane.setForeground(Color.DARK_GRAY);
+		scorePane.setBackground(new Color(0, 0, 0));
+		scoreWindow.add(scorePane, BorderLayout.CENTER);
 
 		JTextArea caixaDeTexto = new JTextArea(mostrarTexto(map));
 		caixaDeTexto.setForeground(Color.WHITE);
@@ -136,28 +74,25 @@ public class Score extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(caixaDeTexto);
 		scrollPane.setBounds(70, 150,300, 150);
 		scrollPane.setBorder(new LineBorder(Color.blue));
-		layeredPane.add(scrollPane);
+		scorePane.add(scrollPane);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(37, 48, 46, 14);
-		layeredPane.add(lblNewLabel);
+		scorePane.add(lblNewLabel);
 
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(Score.class.getResource("/imagens/pontos.png")));
-		lblNewLabel_1.setBounds(23, 20, 364, 71);
-		layeredPane.add(lblNewLabel_1);
+		scorePane.add(scoreLogo = new Logo(23, 20, 364, 71, "/imagens/pontos.png"));
 
-		JButton botaoSair = new JButton("Sair");
-		botaoSair.setBounds(280, 324, 89, 23);
-		layeredPane.add(botaoSair);
+		JButton newGameButton = new JButton("Clique no menu para jogar novamente");
+		newGameButton.setBounds(50, 324, 300, 23);
+		scorePane.add(newGameButton);
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/JogoMemoria.png")));
 		this.getContentPane().setBackground(Color.BLACK);
 
-		botaoSair.addActionListener(new ActionListener() {
+		newGameButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				dispose();
 			}
 
 		});
