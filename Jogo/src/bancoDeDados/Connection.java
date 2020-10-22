@@ -4,16 +4,19 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
 public class Connection {
-
+	
 	public static void main(String[] args) throws Exception {
-		MongoClient mongoClient = (MongoClient) createConnectionToMyMongoDB();
+		System.setProperty("java.net.preferIPv4Stack" , "true");
+		
+		MongoClient connection = MongoClients.create(
+			    "mongodb+srv://stackovercrow:redes12345@rankingmemory.ehqwu.mongodb.net/rankingMemory?retryWrites=true&w=majority");
 
-		if (mongoClient != null) {
+		if (connection != null) {
 			System.out.println("Conexão com banco de dados obtida com sucesso!");
-			((MongoClient) mongoClient).close();
+			((MongoClient) connection).close();
 		}
 
-		mongoClient.close();
+		connection.close();
 
 	}
 

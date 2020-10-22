@@ -9,6 +9,7 @@ import org.bson.conversions.Bson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
@@ -24,8 +25,10 @@ public class PlayerDAO {
 	public PlayerDAO() throws Exception {
 		this.doc = new Document();
 
-		MongoClient con = Connection.createConnectionToMyMongoDB();
-		MongoDatabase bancoDeDados = con.getDatabase("jogoMemoria");
+		MongoClient con = MongoClients.create(
+			    "mongodb+srv://stackovercrow:redes12345@rankingmemory.ehqwu.mongodb.net/rankingMemory?retryWrites=true&w=majority");
+
+		MongoDatabase bancoDeDados = con.getDatabase("rankingMemory");
 		jogadores = bancoDeDados.getCollection("jogador");
 	}
 

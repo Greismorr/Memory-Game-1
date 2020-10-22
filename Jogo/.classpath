@@ -7,9 +7,9 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Mp3"/>
-	<classpathentry kind="lib" path="/home/elayne/Downloads/bson-3.12.3.jar"/>
-	<classpathentry kind="lib" path="/home/elayne/Downloads/mongodb-driver-core-3.12.3.jar"/>
-	<classpathentry kind="lib" path="/home/elayne/Downloads/mongodb-driver-reactivestreams-1.0.1.jar"/>
-	<classpathentry kind="lib" path="/home/elayne/Downloads/mongodb-driver-sync-3.12.7.jar"/>
+	<classpathentry kind="lib" path="A:/Documentos/Code/memoryGame/Memory-Game-1/Jogo/src/jar/bson-3.12.3.jar"/>
+	<classpathentry kind="lib" path="A:/Documentos/Code/memoryGame/Memory-Game-1/Jogo/src/jar/mongodb-driver-core-3.12.3.jar"/>
+	<classpathentry kind="lib" path="A:/Documentos/Code/memoryGame/Memory-Game-1/Jogo/src/jar/mongodb-driver-reactivestreams-1.0.1.jar"/>
+	<classpathentry kind="lib" path="A:/Documentos/Code/memoryGame/Memory-Game-1/Jogo/src/jar/mongodb-driver-3.12.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

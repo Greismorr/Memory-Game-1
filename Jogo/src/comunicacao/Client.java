@@ -46,26 +46,15 @@ public class Client {
 
 	public void executa() throws UnknownHostException, IOException {
 
-		try {
-			Socket cliente = new Socket(host, porta);
+		new Thread() {
+			@Override
+			public void run() {
+				Game jogo = new Game(); 
 
-			new Thread() {
-				@Override
-				public void run() {
-					Game jogo = new Game(); 
+				JOptionPane.showMessageDialog(null, nomeCliente + ", voce esta conectado. Bom Jogo !");
+				jogo.setVisible(true); 
+			}
+		}.start();
 
-					JOptionPane.showMessageDialog(null, nomeCliente + ", voce esta conectado. Bom Jogo !");
-					jogo.setVisible(true); 
-				}
-			}.start();
-
-		} catch (UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "Endereco Invalido. Tente novamente !");
-			e.printStackTrace();
-		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Servidor esta fora do ar");
-			e.printStackTrace();
-		}
 	}
-
 }

@@ -79,36 +79,16 @@ public class Login extends JFrame {
 		playButton.setBounds(233, 450, 90, 30);
 		loginPane.add(playButton);
 
-		ipServidor = new JTextField();
-		ipServidor.setColumns(10);
-		ipServidor.setBounds(204, 299, 150, 20);
-		loginPane.add(ipServidor);
-
-		JLabel ipLabel = new JLabel("Entre com IP do servidor:");
-		ipLabel.setBounds(204, 274, 154, 14);
-		loginPane.add(ipLabel);
-		ipLabel.setForeground(Color.white);
-
-		portaServidor = new JTextField();
-		portaServidor.setColumns(10);
-		portaServidor.setBounds(204, 355, 150, 20);
-		loginPane.add(portaServidor);
-
-		JLabel doorLabel = new JLabel("Entre com a porta:");
-		doorLabel.setBounds(204, 330, 167, 14);
-		loginPane.add(doorLabel);
-		doorLabel.setForeground(Color.white);
-
 		loginPane.add(loginLogo = new Logo(25, 43, 534, 190, "/imagens/testepng.png"));
 
 		nomeJogador = new JTextField();
 		nomeJogador.setColumns(10);
-		nomeJogador.setBounds(204, 411, 150, 20);
+		nomeJogador.setBounds(204, 340, 150, 20);
 		loginPane.add(nomeJogador);
 
 		JLabel nameLabel = new JLabel("Informe seu nome:");
 		nameLabel.setForeground(Color.WHITE);
-		nameLabel.setBounds(204, 386, 167, 14);
+		nameLabel.setBounds(204, 286, 167, 14);
 		loginPane.add(nameLabel);
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/JogoMemoria.png")));
@@ -120,7 +100,7 @@ public class Login extends JFrame {
 		playButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					new Sound().selecionado();
+					new Sound().buttonSound();
 					cliente = new Client(ipServidor.getText(), Integer.parseInt(portaServidor.getText()),
 							nomeJogador.getText());
 					cliente.executa();

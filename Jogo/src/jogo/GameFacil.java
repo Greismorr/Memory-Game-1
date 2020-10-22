@@ -59,13 +59,13 @@ public class GameFacil extends Letter {
 
 			if (cont == 1) {
 
-				new Sound().cartaVirando();
+				new Sound().cardTurn();
 				clicaPrimCarta = this;
 			}
 
 			if (cont == 2) {
 
-				new Sound().cartaVirando();
+				new Sound().cardTurn();
 
 				if (this.getPar().isViradaPraFrente()) {
 
@@ -106,7 +106,7 @@ public class GameFacil extends Letter {
 					}
 
 					else {
-						new Sound().vaia();
+						new Sound().boo();
 						JOptionPane.showMessageDialog(null,
 								"Voce precisa estudar" + "\n Sua pontuacao foi: " + Pontuacao(0));
 					}
