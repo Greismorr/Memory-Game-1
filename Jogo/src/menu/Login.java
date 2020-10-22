@@ -83,12 +83,12 @@ public class Login extends JFrame {
 
 		nomeJogador = new JTextField();
 		nomeJogador.setColumns(10);
-		nomeJogador.setBounds(204, 340, 150, 20);
+		nomeJogador.setBounds(204, 320, 150, 20);
 		loginPane.add(nomeJogador);
 
 		JLabel nameLabel = new JLabel("Informe seu nome:");
 		nameLabel.setForeground(Color.WHITE);
-		nameLabel.setBounds(204, 286, 167, 14);
+		nameLabel.setBounds(204, 280, 167, 14);
 		loginPane.add(nameLabel);
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/imagens/JogoMemoria.png")));
@@ -101,8 +101,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					new Sound().buttonSound();
-					cliente = new Client(ipServidor.getText(), Integer.parseInt(portaServidor.getText()),
-							nomeJogador.getText());
+					cliente = new Client(nomeJogador.getText());
 					cliente.executa();
 					setVisible(false);
 					loginMusic.stop();

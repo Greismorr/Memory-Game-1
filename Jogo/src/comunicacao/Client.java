@@ -11,17 +11,12 @@ import jogo.Game;
 public class Client {
 
 	private static Client cliente;
-
-	private String host;
-	private int porta;
 	public static String nomeCliente;
 
 	public static Jogador jogador;
 	public static PlayerDAO jogadorDAO;
 
-	public Client(String host, int porta, String nomeJogador) {
-		this.host = host;
-		this.porta = porta;
+	public Client(String nomeJogador) {
 		cliente = this;
 		this.nomeCliente = nomeJogador;
 		clienteJogador(nomeJogador);

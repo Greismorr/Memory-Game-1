@@ -27,7 +27,7 @@ public class SocketServidor {
 			SocketServidor servidor = new SocketServidor();
 			servidor.criarServerSocket(port);
 			
-			JOptionPane.showMessageDialog(null, "Conectado com sucesso.");
+			JOptionPane.showMessageDialog(null, "Você está conectado, bom jogo!");
 
 			while (true) {
 				Socket cliente = servidor.esperarConexao();
